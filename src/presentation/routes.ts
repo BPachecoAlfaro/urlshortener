@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { UrlRoutes } from './url/routes';
-import { UrlHandlerRoutes } from './urlHandler/routes';
 
 
 
@@ -13,8 +12,7 @@ export class AppRoutes {
         const router = Router();
     
         // Definir las rutas
-        router.use('/api/url', UrlRoutes.routes );
-        router.use('', UrlHandlerRoutes.routes)
+        router.use('', UrlRoutes.routes );
 
 
 

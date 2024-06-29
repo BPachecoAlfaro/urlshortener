@@ -11,8 +11,12 @@ export class UrlRoutes {
 
         const urlController = new UrlController();
 
-        router.post('/:url', urlController.createUrl )
-        router.delete('/:url', urlController.deleteUrl )
+        router.get('/:shorturl', urlController.getUrl );
+        router.post('/api/url/:url', urlController.createShortUrl );
+        //TODO: implementar despues de register/login
+        // router.get('/api/urls', urlController.getUrlsById )
+        // router.delete('/api/url/:url', urlController.deleteUrl );
+
 
 
         return router;
