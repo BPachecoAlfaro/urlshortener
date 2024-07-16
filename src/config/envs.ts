@@ -11,4 +11,6 @@ export const envs = {
     MONGO_USER: get("MONGO_USER").required().asString(),
     MONGO_PASS: get("MONGO_PASS").required().asString(),
 
+    JWT_SEED: get("JWT_SEED").required().asString(),
+
 }

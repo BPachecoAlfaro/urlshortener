@@ -12,13 +12,12 @@ export class UrlRoutes {
         const urlController = new UrlController();
 
         router.get('/:shorturl', urlController.getUrl );
-        router.get('/api/url/id/:urlid', urlController.getUrlsById )
+        router.get('/api/url/ids', urlController.getUrlsById );
         router.post('/api/url/:url', urlController.createShortUrl );
         //TODO: implementar despues de register/login
-        // router.get('/api/urls', urlController.getUrlsById )
-        // router.delete('/api/url/:url', urlController.deleteUrl );
-
-
+        // router.post('/api/url/auth/:url', [Auth.Middleware], urlController.createShortUrl );
+        // router.get('/api/urls',[Auth.Middleware] ,urlController.getUrlsByUser )
+        // router.delete('/api/url/:shorturl',[Auth.Middleware] , urlController.deleteUrl );
 
         return router;
     }

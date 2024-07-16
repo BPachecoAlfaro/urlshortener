@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { generateShortUrl } from "../../helpers/generateShortUrl";
 import { UrlModel } from '../../data/mongo/models/url.model';
-import { json } from "stream/consumers";
 
 interface typeURL {
     url: string;
@@ -29,6 +28,10 @@ export class UrlController {
             if (!originalUrl) {
                 return res.json('Link not exist')
             }
+            originalUrl.clicks = originalUrl.clicks + 1;
+
+            await originalUrl.save();
+
             return res.redirect(originalUrl?.original_url!);
             
         } catch (error) {
@@ -77,24 +80,13 @@ export class UrlController {
 
     public getUrlsById = async( req: Request, res: Response) => {
 
-        let urlId = req.params.urlid;
-
-        try {
-            const urlIdMatch = await UrlModel.findOne({ _id: urlId });
-            if (!urlIdMatch) {
-                return res.json('Link not exist')
-            }
-            return res.json(urlIdMatch);
-            
-        } catch (error) {
-            
-        }
+        return res.json("Not implemented")
 
     }  
 
     public getUrlsByUser = ( req: Request, res: Response) => {
 
-
+        return res.json("Not implemented")
 
     }    
 
