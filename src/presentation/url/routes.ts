@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { UrlController } from './controller';
+import { AuthMiddleware } from '../middlewares/auth.middleware';
 
 
 
@@ -14,13 +15,13 @@ export class UrlRoutes {
         router.get('/:shorturl', urlController.getUrl );
         router.get('/api/url/ids', urlController.getUrlsById );
         router.post('/api/url/:url', urlController.createShortUrl );
-        //TODO: implementar despues de register/login
-        // router.post('/api/url/auth/:url', [Auth.Middleware], urlController.createShortUrl );
-        // router.get('/api/urls',[Auth.Middleware] ,urlController.getUrlsByUser )
-        // router.delete('/api/url/:shorturl',[Auth.Middleware] , urlController.deleteUrl );
+
+        router.post('/api/authorized/url', [AuthMiddleware.validateJWT], urlController.createShortUrlRegisteredUser );
+        router.get('/api/authorized/urls', [AuthMiddleware.validateJWT], urlController.getUrlsByUser );
+        router.delete('/api/authorized/url/delete/:shorturl', [AuthMiddleware.validateJWT], urlController.deleteUrl );
 
         return router;
-    }
+    };
 
 
-}
+};
