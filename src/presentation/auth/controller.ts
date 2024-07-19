@@ -1,7 +1,4 @@
 import { Request, Response } from "express";
-import { UserModel } from "../../data/mongo/models/user.model";
-import { bcryptAdapter } from "../../config/bcrypt.adapter";
-import { JwtAdapter } from "../../config/jwt.adapter";
 import { UserDto } from '../../domain/dtos/auth/user.dto';
 import { AuthService } from "../services/auth.service";
 import { CustomError } from "../../domain/errors/custom.error";
@@ -46,7 +43,11 @@ export class AuthController {
 
     public validateEmail = (req: Request, res: Response ) => {
         
-        res.json('validateEmail')
+        const { token } = req.params;
+
+        this.authService.validateEmail(token)
+            .then( () => res.json('Email was validated properly'))
+            .catch ( (error) => this.handleError(error, res) );
 
     }
 
